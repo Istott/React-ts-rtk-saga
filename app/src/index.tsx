@@ -7,12 +7,17 @@ import App from './App';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from '@redux-saga/core';
 import { configureStore } from '@reduxjs/toolkit';
+import catsReducer from './components/catSlice';
+import catSaga from './catSaga';
 
 const saga = createSagaMiddleware();
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    cats: catsReducer
+  },
   middleware: [saga]
 })
+saga.run(catSaga);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
